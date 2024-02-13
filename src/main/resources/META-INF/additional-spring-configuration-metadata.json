@@ -1,0 +1,58 @@
+{
+  "groups": [
+    {
+      "name": "disk-mirror",
+      "type": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "disk-mirror.config",
+      "type": "top.lingyuzhao.diskMirror.conf.Config",
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+    },
+    {
+      "name": "disk-mirror.fs-default-fs",
+      "type": "java.lang.String",
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+    },
+    {
+      "name": "disk-mirror.params",
+      "type": "com.alibaba.fastjson2.JSONObject",
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+    },
+    {
+      "name": "disk-mirror.protocol-prefix",
+      "type": "java.lang.String",
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+    },
+    {
+      "name": "disk-mirror.res-key",
+      "type": "java.lang.String",
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+    },
+    {
+      "name": "disk-mirror.root-dir",
+      "type": "java.lang.String",
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+    },
+    {
+      "name": "disk-mirror.secure-key",
+      "type": "java.lang.String",
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+    },
+    {
+      "name": "disk-mirror.space-max-size",
+      "type": "com.alibaba.fastjson2.JSONObject",
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+    },
+    {
+      "name": "disk-mirror.user-disk-mirror-space-quota",
+      "type": "java.lang.Long",
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
+      "defaultValue": 0
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="diskMirror-starter:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/diskMirror_starter_jar</output-path>
+    <root id="archive" name="diskMirror-starter.jar">
+      <element id="module-output" name="diskMirror-spring-boot-starter" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../RunTime/MAVEN/MAVEN_BASE/org/springframework/spring-expression/6.0.9/spring-expression-6.0.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../RunTime/MAVEN/MAVEN_BASE/org/springframework/spring-context/6.0.9/spring-context-6.0.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../RunTime/MAVEN/MAVEN_BASE/org/springframework/spring-jcl/6.0.9/spring-jcl-6.0.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../RunTime/MAVEN/MAVEN_BASE/org/springframework/spring-beans/6.0.9/spring-beans-6.0.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../RunTime/MAVEN/MAVEN_BASE/com/alibaba/fastjson2/fastjson2/2.0.25/fastjson2-2.0.25.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../RunTime/MAVEN/MAVEN_BASE/io/github/BeardedManZhao/diskMirror/1.1.1/diskMirror-1.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../RunTime/MAVEN/MAVEN_BASE/org/springframework/boot/spring-boot-devtools/3.1.0/spring-boot-devtools-3.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../RunTime/MAVEN/MAVEN_BASE/org/springframework/boot/spring-boot/3.1.0/spring-boot-3.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../RunTime/MAVEN/MAVEN_BASE/org/springframework/spring-core/6.0.9/spring-core-6.0.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../RunTime/MAVEN/MAVEN_BASE/org/springframework/spring-aop/6.0.9/spring-aop-6.0.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../RunTime/MAVEN/MAVEN_BASE/org/springframework/boot/spring-boot-configuration-processor/3.1.0/spring-boot-configuration-processor-3.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../RunTime/MAVEN/MAVEN_BASE/org/springframework/boot/spring-boot-autoconfigure/3.1.0/spring-boot-autoconfigure-3.1.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
