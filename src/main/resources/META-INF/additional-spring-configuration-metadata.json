@@ -3,55 +3,64 @@
     {
       "name": "disk-mirror",
       "type": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
-      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
+      "description": "The configuration group for diskMirror."
     }
   ],
   "properties": [
     {
       "name": "disk-mirror.config",
       "type": "top.lingyuzhao.diskMirror.conf.Config",
-      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
+      "description": "The adapter type to be used by diskMirror. Available options can be viewed through the top.lingyuzhao.diskMirror.core.DiskMirror class."
     },
     {
       "name": "disk-mirror.fs-default-fs",
       "type": "java.lang.String",
-      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
+      "description": "The address of a third-party file system (e.g., HDFS) that the diskMirror adapter should connect to if required."
     },
     {
       "name": "disk-mirror.params",
       "type": "com.alibaba.fastjson2.JSONObject",
-      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
+      "description": "Parameters used when concatenating URLs during diskMirror operations. The implementation varies across different adapters."
     },
     {
       "name": "disk-mirror.protocol-prefix",
       "type": "java.lang.String",
-      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
+      "description": "The protocol prefix to use when constructing URLs in diskMirror."
     },
     {
       "name": "disk-mirror.res-key",
       "type": "java.lang.String",
-      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
+      "description": "When returning operation results, diskMirror uses this configuration item as the name of the field containing the result status."
     },
     {
       "name": "disk-mirror.root-dir",
       "type": "java.lang.String",
-      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
+      "description": "The root directory used by the diskMirror adapter during operations. This specified directory will be managed by diskMirror."
     },
     {
       "name": "disk-mirror.secure-key",
       "type": "java.lang.String",
-      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
+      "description": "A security key is required for diskMirror operations. If the client's key differs from this value, an error is raised directly. This configuration item specifies a string-based key which will be calculated into an integer value using a specific algorithm. Clients must include this value in their requests."
     },
     {
       "name": "disk-mirror.space-max-size",
       "type": "com.alibaba.fastjson2.JSONObject",
-      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties"
+      "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
+      "description": "In diskMirror, you can configure individual space quotas for each user. Using this configuration item, you can set the default space quota for users in bytes."
     },
     {
       "name": "disk-mirror.user-disk-mirror-space-quota",
       "type": "java.lang.Long",
       "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
-      "defaultValue": 0
+      "description": "diskMirror divides space into multiple segments with usage limits. This configuration item is used to specify the space quota for each segment in bytes."
     }
   ],
   "hints": []

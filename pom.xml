@@ -5,7 +5,7 @@
 
     <groupId>io.github.BeardedManZhao</groupId>
     <artifactId>diskMirror-spring-boot-starter</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
     <name>diskMirror-spring-boot-starter</name>
     <description>diskMirror-spring-boot-starter</description>
@@ -92,6 +92,8 @@
         </developerConnection>
         <url>https://github.com/BeardedManZhao/diskMirror-spring-boot-starter.git</url>
     </scm>
+
+    <!-- 上传命令：mvn deploy -DskipTests -DargLine=" -(这里记得删掉)-add-opens java.base/java.util=ALL-UNNAMED" -->
 
     <profiles>
         <profile>

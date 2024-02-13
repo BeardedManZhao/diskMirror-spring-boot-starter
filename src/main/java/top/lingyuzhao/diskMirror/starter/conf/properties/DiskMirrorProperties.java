@@ -6,6 +6,11 @@ import top.lingyuzhao.diskMirror.conf.Config;
 import top.lingyuzhao.diskMirror.core.DiskMirror;
 import top.lingyuzhao.diskMirror.starter.conf.DiskMirrorAutoConfiguration;
 
+/**
+ * 配置文件属性类，此属性类中的所有配置可以直接在 application.yaml 文件中进行配置，其格式为 disk-mirror.*
+ * <p>
+ * The configuration file property class allows all configurations in this property class to be directly configured in the application.yaml file, in the format of disk mirror*
+ */
 @ConfigurationProperties(
         prefix = "disk-mirror"
 )

@@ -14,6 +14,10 @@ import top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties;
 import java.util.logging.Logger;
 
 /**
+ * diskMirror 自动配置类 SpringBoot 将可以自动的通过此类获取到 diskMirror 的适配器对象。
+ * <p>
+ * The automatic configuration class SpringBoot will automatically obtain the adapter object for diskMirror through this class.
+ *
  * @author zhao
  */
 @Configuration(
@@ -33,7 +37,6 @@ public class DiskMirrorAutoConfiguration {
 
     public DiskMirrorAutoConfiguration(DiskMirrorProperties diskMirrorProperties) {
         this.diskMirrorProperties = diskMirrorProperties;
-        LOGGER.info("load properties " + diskMirrorProperties.getClass());
     }
 
     @Bean

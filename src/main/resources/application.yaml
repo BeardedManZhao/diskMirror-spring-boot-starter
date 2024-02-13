@@ -18,4 +18,4 @@ disk-mirror:
   # 安全密钥
   secure-key: ""
   # 指定的几个用户的空间对应的容量
-  space-max-size: {}
+  space-max-size: { }
