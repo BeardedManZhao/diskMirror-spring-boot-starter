@@ -1,6 +1,5 @@
 package top.lingyuzhao.diskMirror.starter.conf;
 
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,7 +22,6 @@ import java.util.logging.Logger;
 @Configuration(
         proxyBeanMethods = false
 )
-@AutoConfiguration
 @ConditionalOnClass({
         Adapter.class, Config.class
 })
