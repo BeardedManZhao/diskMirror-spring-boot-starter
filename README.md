@@ -20,7 +20,7 @@ starter 最适用于 SpringBoot3 版本，且也推荐使用 SpringBoot3 版本�
     <dependency>
         <groupId>io.github.BeardedManZhao</groupId>
         <artifactId>diskMirror-spring-boot-starter</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </dependency>
     <!-- 导入 diskMirror 的 库 这是一个可选操作，如果您有版本的指定需求，可以在这里设置，如果没有可以不设置，diskMirror starter 会自动配置 -->
     <dependency>
@@ -160,7 +160,7 @@ http://localhost:80/
 
 ### 1.0.1
 
-*2024-02-14*
+*发布时间：2024-02-14*
 
 - 增加了 enabled-feature 配置项，使得您可以通过调整此参数来实现是否要启动 diskMirror 的 starter，减少了需要变更 pom.xml 的风险。
 - 增加了针对 zhao-utils 库的自动依赖，您可以不去声明此库的依赖，diskMirror starter 会自动依赖它。
