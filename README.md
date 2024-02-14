@@ -156,13 +156,17 @@ http://localhost:80/
 
 ```
 
+### 如何使用 diskMirror 的适配器？
+
+通过 starter 获取到的就是 diskMirror 中的适配器对象，您可以通过适配器对象实现有效的文件操作，具体使用方法请参考 [diskMirror 的主页](https://github.com/BeardedManZhao/DiskMirror.git)
+
 ## 更新记录
 
 ### 1.0.1
 
 *发布时间：2024-02-14*
 
-- 增加了 enabled-feature 配置项，使得您可以通过调整此参数来实现是否要启动 diskMirror 的 starter，减少了需要变更 pom.xml 的风险。
+- 增加了 enable-feature 配置项，使得您可以通过调整此参数来实现是否要启动 diskMirror 的 starter，减少了需要变更 pom.xml 的风险。
 - 增加了针对 zhao-utils 库的自动依赖，您可以不去声明此库的依赖，diskMirror starter 会自动依赖它。
 
 ## 更多
