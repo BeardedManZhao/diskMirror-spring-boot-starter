@@ -16,25 +16,25 @@ starter 最适用于 SpringBoot3 版本，且也推荐使用 SpringBoot3 版本�
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-    <!-- 导入 DiskMirror 的 starter -->
+    <!-- 导入 DiskMirror 的 starter TODO 一般来说 只需要导入这个和其它的第三方文件系统依赖即可 -->
     <dependency>
-        <groupId>org.springframework.boot</groupId>
+        <groupId>io.github.BeardedManZhao</groupId>
         <artifactId>diskMirror-spring-boot-starter</artifactId>
         <version>1.0.0</version>
     </dependency>
-    <!-- 导入 diskMirror 的 库 这是一个可选操作 diskMirror starter 会自动配置 -->
+    <!-- 导入 diskMirror 的 库 这是一个可选操作，如果您有版本的指定需求，可以在这里设置，如果没有可以不设置，diskMirror starter 会自动配置 -->
     <dependency>
         <groupId>io.github.BeardedManZhao</groupId>
         <artifactId>diskMirror</artifactId>
         <version>1.1.2</version>
     </dependency>
-    <!-- 导入 zhao utils 的库 这是一个工具类，被 diskMirror 依赖，您可以像上面一样导入 -->
+    <!-- 导入 zhao utils 的库 这是一个工具类，被 diskMirror 依赖，您可以像上面一样导入 也是一个可选操作（需要注意的是，在 1.0.0 版本中 此库是必须引入的） -->
     <dependency>
         <groupId>io.github.BeardedManZhao</groupId>
         <artifactId>zhao-utils</artifactId>
         <version>1.0.20240121</version>
     </dependency>
-    <!-- 导入 fastjson2 库 这是一个JSON解析库，被 diskMirror 依赖，您可以像上面一样导入 -->
+    <!-- 导入 fastjson2 库 这是一个JSON解析库，被 diskMirror 依赖，您可以像上面一样导入 也是一个可选操作 -->
     <dependency>
         <groupId>com.alibaba.fastjson2</groupId>
         <artifactId>fastjson2</artifactId>
@@ -44,6 +44,40 @@ starter 最适用于 SpringBoot3 版本，且也推荐使用 SpringBoot3 版本�
 ```
 
 ## 开发基本的 SpringBoot3 项目
+
+在这里您可以根据一些简单的示例来了解如何使用 diskMirror 的盘镜 starter。
+
+### 配置 starter
+
+diskMirror 的 starter 配置文件具有默认数值，下面就是默认的配置文件，同样，您可以按照下面的示例来进行配置文件的修改。
+
+PS 请将 enable-feature 设置为 true!!!
+
+```yaml
+disk-mirror:
+  # 此配置项目代表的就是是否启用 diskMirror 如果设置为 false 则代表不启用，diskMirror 的starter 将不会被加载，需要您手动设置此参数
+  enable-feature: false
+  # 要使用的盘镜适配器类型 在这里默认数值是本地盘镜适配器，具体的适配器 您可以查阅 top.lingyuzhao.diskMirror.core.DiskMirror 类
+  adapter-type: "LocalFSAdapter"
+  # 要被盘镜管理的目录 用于存储数据的目录 此目录是真实目录
+  root-dir: "/DiskMirror"
+  # 一般来说 如果对接带第三方文件系统 而非本次文件系统 则此参数则会派上用场，其代表的就是第三方文件系统的地址
+  fs-default-fs: "hdfs://localhost:8020/"
+  # 当处理之后，如果处理无错误会返回一个结果状态，此数值代表的就是是否正确处理
+  ok-value: "ok!!!!"
+  # 返回结果的key 返回结果中 结果状态的字段名字
+  res-key: "res"
+  # 协议前缀，默认为http 不同协议前缀有不同的意义，用于拼接 url
+  protocol-prefix: "http://localhost:80/"
+  # 参数 可能会派上用场，在不同的适配器中有不同的实现
+  params: { }
+  # 用户磁盘配额 每个盘镜空间的磁盘最大空间数值，单位是字节
+  user-disk-mirror-space-quota: 134217728
+  # 安全密钥
+  secure-key: ""
+  # 指定的几个用户的空间对应的容量
+  space-max-size: { }
+```
 
 ### MAIN 启动主类
 
@@ -66,6 +100,7 @@ public class SpringBoot3DemoApplication {
     public static void main(String[] args) {
         // 获取到运行器上下文
         final var run = SpringApplication.run(SpringBoot3DemoApplication.class, args);
+        // 查看一下 diskMirror 是否被加载进来了
         System.out.println(run.getBean(Adapter.class).getConfig().get(Config.PROTOCOL_PREFIX));
     }
 
@@ -120,6 +155,17 @@ LocalFSAdapter:1.1.2
 http://localhost:80/
 
 ```
+
+## 更新记录
+
+### 1.0.1
+
+*2024-02-14*
+
+- 增加了 enabled-feature 配置项，使得您可以通过调整此参数来实现是否要启动 diskMirror 的 starter，减少了需要变更 pom.xml 的风险。
+- 增加了针对 zhao-utils 库的自动依赖，您可以不去声明此库的依赖，diskMirror starter 会自动依赖它。
+
+## 更多
 
 ----
 

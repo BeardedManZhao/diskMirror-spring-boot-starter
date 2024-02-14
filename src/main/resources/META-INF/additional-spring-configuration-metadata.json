@@ -9,10 +9,10 @@
   ],
   "properties": [
     {
-      "name": "disk-mirror.config",
-      "type": "top.lingyuzhao.diskMirror.conf.Config",
+      "name": "disk-mirror.enabled-feature",
+      "type": "java.lang.Boolean",
       "sourceType": "top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties",
-      "description": "The adapter type to be used by diskMirror. Available options can be viewed through the top.lingyuzhao.diskMirror.core.DiskMirror class."
+      "description": "This configuration item represents whether to enable diskMirror. If set to false, it means it is not enabled, and the starter of diskMirror will not be loaded."
     },
     {
       "name": "disk-mirror.fs-default-fs",

@@ -2,6 +2,7 @@ package top.lingyuzhao.diskMirror.starter.conf;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,7 @@ import java.util.logging.Logger;
         Adapter.class, Config.class
 })
 @EnableConfigurationProperties(DiskMirrorProperties.class)
+@ConditionalOnProperty(prefix = "disk-mirror", name = "enable-feature", havingValue = "true")
 public class DiskMirrorAutoConfiguration {
 
     public final static Logger LOGGER = Logger.getLogger(DiskMirrorAutoConfiguration.class.getName());
