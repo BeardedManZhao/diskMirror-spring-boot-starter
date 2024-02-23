@@ -166,6 +166,7 @@ http://localhost:80/
 #### 1.0.2
 
 *发布时间：2024-02-23*
+
 - 针对配置文件的默认数值进行的设定，这使得您可能不需要在配置文件中将所有配置项目进行设置
 - 变更了适配器Bean 在 SpringBoot 中的Bean 的名字，这有助于避免一些命名冲突问题，变更的情况为 `getAdapter -> top.lingyuzhao.diskMirror.core.Adapter`
 
@@ -183,5 +184,6 @@ http://localhost:80/
 ----
 
 - diskMirror starter SpringBoot：https://github.com/BeardedManZhao/diskMirror-spring-boot-starter.git
-- diskMirror 后端服务器版本：https://github.com/BeardedManZhao/DiskMirrorBackEnd.git
+- diskMirror 后端服务器版本（MVC）：https://github.com/BeardedManZhao/DiskMirrorBackEnd.git
+- diskMirror 后端服务器版本（SpringBoot）：https://github.com/BeardedManZhao/diskMirror-backEnd-spring-boot.git
 - diskMirror Java API 版本：https://github.com/BeardedManZhao/DiskMirror.git

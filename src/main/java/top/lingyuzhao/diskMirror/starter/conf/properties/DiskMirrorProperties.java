@@ -55,9 +55,8 @@ public class DiskMirrorProperties {
 
     /**
      * @param adapterType 要使用的盘镜适配器类型 在这里默认数值是本地盘镜适配器，具体的适配器 您可以查阅 top.lingyuzhao.diskMirror.core.DiskMirror 类
-     *
+     *                    <p>
      *                    The default value for the type of disk mirror adapter to be used here is the local disk mirror adapter. You can refer to top-lingyuzhao. diskMirror. core for specific adapters DiskMirror class
-     *
      * @see top.lingyuzhao.diskMirror.core.DiskMirror
      */
     public void setAdapterType(String adapterType) {
