@@ -39,7 +39,12 @@ public class DiskMirrorAutoConfiguration {
         this.diskMirrorProperties = diskMirrorProperties;
     }
 
-    @Bean
+    /**
+     * @return 当前 starter 中根据配置文件自动生成的 diskMirror 适配器对象。
+     * <p>
+     * The diskMirror adapter object automatically generated in the current starter based on the configuration file.
+     */
+    @Bean("top.lingyuzhao.diskMirror.core.Adapter")
     // 当容器没有这个 Bean 的时候才创建这个 Bean
     @ConditionalOnMissingBean(Adapter.class)
     public Adapter getAdapter() {

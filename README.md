@@ -20,7 +20,7 @@ starter 最适用于 SpringBoot3 版本，且也推荐使用 SpringBoot3 版本�
     <dependency>
         <groupId>io.github.BeardedManZhao</groupId>
         <artifactId>diskMirror-spring-boot-starter</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </dependency>
     <!-- 导入 diskMirror 的 库 这是一个可选操作，如果您有版本的指定需求，可以在这里设置，如果没有可以不设置，diskMirror starter 会自动配置 -->
     <dependency>
@@ -158,9 +158,18 @@ http://localhost:80/
 
 ### 如何使用 diskMirror 的适配器？
 
-通过 starter 获取到的就是 diskMirror 中的适配器对象，您可以通过适配器对象实现有效的文件操作，具体使用方法请参考 [diskMirror 的主页](https://github.com/BeardedManZhao/DiskMirror.git)
+通过 starter 获取到的就是 diskMirror
+中的适配器对象，您可以通过适配器对象实现有效的文件操作，具体使用方法请参考 [diskMirror 的主页](https://github.com/BeardedManZhao/DiskMirror.git)
 
 ## 更新记录
+
+#### 1.0.2
+
+*发布时间：2024-02-23*
+- 针对配置文件的默认数值进行的设定，这使得您可能不需要在配置文件中将所有配置项目进行设置
+- 变更了适配器Bean 在 SpringBoot 中的Bean 的名字，这有助于避免一些命名冲突问题，变更的情况为 `getAdapter -> top.lingyuzhao.diskMirror.core.Adapter`
+
+----
 
 ### 1.0.1
 

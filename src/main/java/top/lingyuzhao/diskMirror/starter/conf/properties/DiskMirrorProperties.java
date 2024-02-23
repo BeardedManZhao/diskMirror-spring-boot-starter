@@ -19,16 +19,24 @@ public class DiskMirrorProperties {
     // 修改为字符串类型，并添加一个setter方法用于从配置文件中注入适配器名称
     private String adapterType = DiskMirror.LocalFSAdapter.name();
 
-    private String rootDir, fsDefaultFs, resKey, protocolPrefix, secureKey;
-    private JSONObject params, spaceMaxSize;
-    private long userDiskMirrorSpaceQuota;
+    private String rootDir, fsDefaultFs, resKey, protocolPrefix, secureKey = "";
+    private JSONObject params = new JSONObject(), spaceMaxSize = new JSONObject();
+    private long userDiskMirrorSpaceQuota = 128 << 10 << 10;
 
     public Config getConfig() {
         final Config config = new Config();
-        config.put(Config.ROOT_DIR, rootDir);
-        config.put(Config.FS_DEFAULT_FS, fsDefaultFs);
-        config.put(Config.RES_KEY, resKey);
-        config.put(Config.PROTOCOL_PREFIX, protocolPrefix);
+        if (rootDir != null) {
+            config.put(Config.ROOT_DIR, rootDir);
+        }
+        if (fsDefaultFs != null) {
+            config.put(Config.FS_DEFAULT_FS, fsDefaultFs);
+        }
+        if (resKey != null) {
+            config.put(Config.RES_KEY, resKey);
+        }
+        if (protocolPrefix != null) {
+            config.put(Config.PROTOCOL_PREFIX, protocolPrefix);
+        }
         config.put(Config.PARAMS, params);
         this.spaceMaxSize.forEach(
                 (k, v) -> config.setSpaceMaxSize(k, (Long) v)
@@ -47,6 +55,10 @@ public class DiskMirrorProperties {
 
     /**
      * @param adapterType 要使用的盘镜适配器类型 在这里默认数值是本地盘镜适配器，具体的适配器 您可以查阅 top.lingyuzhao.diskMirror.core.DiskMirror 类
+     *
+     *                    The default value for the type of disk mirror adapter to be used here is the local disk mirror adapter. You can refer to top-lingyuzhao. diskMirror. core for specific adapters DiskMirror class
+     *
+     * @see top.lingyuzhao.diskMirror.core.DiskMirror
      */
     public void setAdapterType(String adapterType) {
         this.adapterType = adapterType;
