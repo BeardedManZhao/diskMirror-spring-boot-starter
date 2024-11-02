@@ -9,7 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import top.lingyuzhao.diskMirror.conf.Config;
 import top.lingyuzhao.diskMirror.core.Adapter;
 import top.lingyuzhao.diskMirror.core.DiskMirror;
+import top.lingyuzhao.diskMirror.core.module.HandleModule;
 import top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties;
+import top.lingyuzhao.diskMirror.starter.conf.properties.ImageCompressModuleConf;
 
 import java.util.logging.Logger;
 
@@ -39,6 +41,16 @@ public class DiskMirrorAutoConfiguration {
         this.diskMirrorProperties = diskMirrorProperties;
     }
 
+    private static void loadHandleModule(Adapter adapter, ImageCompressModuleConf handleModule) {
+        final HandleModule type = handleModule.getType();
+        if (handleModule.isEnable()) {
+            LOGGER.info("loadHandleModule ---> Enable  handleModule." + type.name());
+            adapter.addHandleModule(type);
+        } else {
+            LOGGER.info("loadHandleModule -×-> Disable handleModule." + type.name());
+        }
+    }
+
     /**
      * @return 当前 starter 中根据配置文件自动生成的 diskMirror 适配器对象。
      * <p>
@@ -49,7 +61,9 @@ public class DiskMirrorAutoConfiguration {
     @ConditionalOnMissingBean(Adapter.class)
     public Adapter getAdapter() {
         final DiskMirror diskMirrorAdapter = diskMirrorProperties.getAdapterType();
+        final Adapter adapter = diskMirrorAdapter.getAdapter(diskMirrorProperties.getConfig());
+        loadHandleModule(adapter, diskMirrorProperties.getImageCompressModule());
         LOGGER.info("diskMirror is ok!!!\n" + diskMirrorAdapter.getVersion());
-        return diskMirrorAdapter.getAdapter(diskMirrorProperties.getConfig());
+        return adapter;
     }
 }

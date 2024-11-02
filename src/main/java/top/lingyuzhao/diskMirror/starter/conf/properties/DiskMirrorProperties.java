@@ -23,6 +23,8 @@ public class DiskMirrorProperties {
     private JSONObject params = new JSONObject(), spaceMaxSize = new JSONObject();
     private long userDiskMirrorSpaceQuota = 128 << 10 << 10;
 
+    private ImageCompressModuleConf imageCompressModule = new ImageCompressModuleConf();
+
     public Config getConfig() {
         final Config config = new Config();
         if (rootDir != null) {
@@ -125,5 +127,13 @@ public class DiskMirrorProperties {
 
     public void setUserDiskMirrorSpaceQuota(long userDiskMirrorSpaceQuota) {
         this.userDiskMirrorSpaceQuota = userDiskMirrorSpaceQuota;
+    }
+
+    public ImageCompressModuleConf getImageCompressModule() {
+        return imageCompressModule;
+    }
+
+    public void setImageCompressModule(ImageCompressModuleConf imageCompressModule) {
+        this.imageCompressModule = imageCompressModule;
     }
 }
