@@ -24,18 +24,6 @@ maven 中引入，如果您不需要第三方文件系统，可以不引入
         <artifactId>diskMirror-spring-boot-starter</artifactId>
         <version>1.0.3</version>
     </dependency>
-    <!-- 导入 diskMirror 的 库 这是一个可选操作，如果您有版本的指定需求，可以在这里设置，如果没有可以不设置，diskMirror starter 会自动配置 -->
-    <dependency>
-        <groupId>io.github.BeardedManZhao</groupId>
-        <artifactId>diskMirror</artifactId>
-        <version>1.3.0</version>
-    </dependency>
-    <!-- 导入 zhao utils 的库 这是一个工具类，被 diskMirror 依赖，您可以像上面一样导入 也是一个可选操作（需要注意的是，在 1.0.0 版本中 此库是必须引入的） -->
-    <dependency>
-        <groupId>io.github.BeardedManZhao</groupId>
-        <artifactId>zhao-utils</artifactId>
-        <version>1.0.20241026</version>
-    </dependency>
     <!-- 导入 fastjson2 库 这是一个JSON解析库，被 diskMirror 依赖，您可以像上面一样导入 也是一个可选操作 -->
     <dependency>
         <groupId>com.alibaba.fastjson2</groupId>
