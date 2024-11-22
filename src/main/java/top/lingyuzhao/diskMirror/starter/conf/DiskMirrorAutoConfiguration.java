@@ -1,8 +1,8 @@
 package top.lingyuzhao.diskMirror.starter.conf;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +29,6 @@ import java.util.logging.Logger;
         Adapter.class, Config.class
 })
 @EnableConfigurationProperties(DiskMirrorProperties.class)
-@ConditionalOnProperty(prefix = "disk-mirror", name = "enable-feature", havingValue = "true")
 public class DiskMirrorAutoConfiguration {
 
     public final static Logger LOGGER = Logger.getLogger(DiskMirrorAutoConfiguration.class.getName());
@@ -37,6 +36,7 @@ public class DiskMirrorAutoConfiguration {
     // 注入属性类
     private final DiskMirrorProperties diskMirrorProperties;
 
+    @Autowired
     public DiskMirrorAutoConfiguration(DiskMirrorProperties diskMirrorProperties) {
         this.diskMirrorProperties = diskMirrorProperties;
     }
@@ -57,9 +57,12 @@ public class DiskMirrorAutoConfiguration {
      * The diskMirror adapter object automatically generated in the current starter based on the configuration file.
      */
     @Bean("top.lingyuzhao.diskMirror.core.Adapter")
-    // 当容器没有这个 Bean 的时候才创建这个 Bean
-    @ConditionalOnMissingBean(Adapter.class)
+    @ConditionalOnMissingBean(name = "top.lingyuzhao.diskMirror.core.Adapter")
     public Adapter getAdapter() {
+        if (!this.diskMirrorProperties.isEnabledFeature()) {
+            LOGGER.info("DiskMirror is not enable.");
+            throw new RuntimeException("DiskMirror is not enable.");
+        }
         final DiskMirror diskMirrorAdapter = diskMirrorProperties.getAdapterType();
         final Adapter adapter = diskMirrorAdapter.getAdapter(diskMirrorProperties.getConfig());
         loadHandleModule(adapter, diskMirrorProperties.getImageCompressModule());

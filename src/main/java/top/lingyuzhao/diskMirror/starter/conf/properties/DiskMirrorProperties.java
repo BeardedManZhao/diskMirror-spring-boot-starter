@@ -19,6 +19,8 @@ public class DiskMirrorProperties {
     // 修改为字符串类型，并添加一个setter方法用于从配置文件中注入适配器名称
     private String adapterType = DiskMirror.LocalFSAdapter.name();
 
+    private boolean enabledFeature = false;
+
     private String rootDir, fsDefaultFs, resKey, protocolPrefix, secureKey = "";
     private JSONObject params = new JSONObject(), spaceMaxSize = new JSONObject();
     private long userDiskMirrorSpaceQuota = 128 << 10 << 10;
@@ -62,6 +64,7 @@ public class DiskMirrorProperties {
      * @see top.lingyuzhao.diskMirror.core.DiskMirror
      */
     public void setAdapterType(String adapterType) {
+        DiskMirrorAutoConfiguration.LOGGER.info("setAdapterType run = adapterType:" + adapterType);
         this.adapterType = adapterType;
     }
 
@@ -70,6 +73,7 @@ public class DiskMirrorProperties {
     }
 
     public void setRootDir(String rootDir) {
+        DiskMirrorAutoConfiguration.LOGGER.info("setRootDir run = rootDir:" + rootDir);
         this.rootDir = rootDir;
     }
 
@@ -78,6 +82,7 @@ public class DiskMirrorProperties {
     }
 
     public void setFsDefaultFs(String fsDefaultFs) {
+        DiskMirrorAutoConfiguration.LOGGER.info("setFsDefaultFs run = fsDefaultFs:" + fsDefaultFs);
         this.fsDefaultFs = fsDefaultFs;
     }
 
@@ -86,6 +91,7 @@ public class DiskMirrorProperties {
     }
 
     public void setResKey(String resKey) {
+        DiskMirrorAutoConfiguration.LOGGER.info("setResKey run = resKey:" + resKey);
         this.resKey = resKey;
     }
 
@@ -94,6 +100,7 @@ public class DiskMirrorProperties {
     }
 
     public void setProtocolPrefix(String protocolPrefix) {
+        DiskMirrorAutoConfiguration.LOGGER.info("setProtocolPrefix run = protocolPrefix:" + protocolPrefix);
         this.protocolPrefix = protocolPrefix;
     }
 
@@ -102,6 +109,7 @@ public class DiskMirrorProperties {
     }
 
     public void setSecureKey(String secureKey) {
+        DiskMirrorAutoConfiguration.LOGGER.info("setSecureKey run = secureKey:" + secureKey);
         this.secureKey = secureKey;
     }
 
@@ -110,6 +118,7 @@ public class DiskMirrorProperties {
     }
 
     public void setParams(JSONObject params) {
+        DiskMirrorAutoConfiguration.LOGGER.info("setParams run = params:" + params);
         this.params = params;
     }
 
@@ -118,6 +127,7 @@ public class DiskMirrorProperties {
     }
 
     public void setSpaceMaxSize(JSONObject spaceMaxSize) {
+        DiskMirrorAutoConfiguration.LOGGER.info("setSpaceMaxSize run = spaceMaxSize:" + spaceMaxSize);
         this.spaceMaxSize = spaceMaxSize;
     }
 
@@ -126,6 +136,7 @@ public class DiskMirrorProperties {
     }
 
     public void setUserDiskMirrorSpaceQuota(long userDiskMirrorSpaceQuota) {
+        DiskMirrorAutoConfiguration.LOGGER.info("setUserDiskMirrorSpaceQuota run = userDiskMirrorSpaceQuota:" + userDiskMirrorSpaceQuota);
         this.userDiskMirrorSpaceQuota = userDiskMirrorSpaceQuota;
     }
 
@@ -134,6 +145,16 @@ public class DiskMirrorProperties {
     }
 
     public void setImageCompressModule(ImageCompressModuleConf imageCompressModule) {
+        DiskMirrorAutoConfiguration.LOGGER.info("setImageCompressModule run = imageCompressModule:" + imageCompressModule.getType());
         this.imageCompressModule = imageCompressModule;
+    }
+
+    public boolean isEnabledFeature() {
+        return enabledFeature;
+    }
+
+    public void setEnabledFeature(boolean enableFeature) {
+        DiskMirrorAutoConfiguration.LOGGER.info("setEnableFeature run = enableFeature:" + enableFeature);
+        this.enabledFeature = enableFeature;
     }
 }

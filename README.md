@@ -22,7 +22,7 @@ maven 中引入，如果您不需要第三方文件系统，可以不引入
     <dependency>
         <groupId>io.github.BeardedManZhao</groupId>
         <artifactId>diskMirror-spring-boot-starter</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
     </dependency>
     <!-- 导入 fastjson2 库 这是一个JSON解析库，被 diskMirror 依赖，您可以像上面一样导入 也是一个可选操作 -->
     <dependency>
@@ -172,6 +172,13 @@ http://localhost:80/
 中的适配器对象，您可以通过适配器对象实现有效的文件操作，具体使用方法请参考 [diskMirror 的主页](https://github.com/BeardedManZhao/DiskMirror.git)
 
 ## 更新记录
+
+#### 1.0.4
+
+*发布事件：2024-11-22*
+
+- 对于限定条件进行了优化，且对于异常的信息和日志打印进行了优化，易于排查
+- 装载了 1.3.2 版本的 diskMirror
 
 #### 1.0.3
 
