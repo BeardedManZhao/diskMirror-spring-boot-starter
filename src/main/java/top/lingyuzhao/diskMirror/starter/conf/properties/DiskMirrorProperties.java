@@ -4,7 +4,13 @@ import com.alibaba.fastjson2.JSONObject;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import top.lingyuzhao.diskMirror.conf.Config;
 import top.lingyuzhao.diskMirror.core.DiskMirror;
+import top.lingyuzhao.diskMirror.core.module.ModuleManager;
+import top.lingyuzhao.diskMirror.core.module.SkCheckModule;
+import top.lingyuzhao.diskMirror.core.module.Verification;
 import top.lingyuzhao.diskMirror.starter.conf.DiskMirrorAutoConfiguration;
+import top.lingyuzhao.utils.StrUtils;
+
+import java.util.ArrayList;
 
 /**
  * 配置文件属性类，此属性类中的所有配置可以直接在 application.yaml 文件中进行配置，其格式为 disk-mirror.*
@@ -26,6 +32,37 @@ public class DiskMirrorProperties {
     private long userDiskMirrorSpaceQuota = 128 << 10 << 10;
 
     private ImageCompressModuleConf imageCompressModule = new ImageCompressModuleConf();
+
+    /**
+     * 添加一个验证器
+     *
+     * @param moduleName 校验模块的类名字
+     * @param loadMode   验证模块的加载模式
+     */
+    private static void addVerification(String moduleName, String loadMode) {
+        Verification verification = null;
+        // 加载出模块对象
+        if (moduleName.equals("SkCheckModule")) {
+            verification = new SkCheckModule(moduleName, "密钥校验服务");
+        } else {
+            DiskMirrorAutoConfiguration.LOGGER.warning("未定义的模块：" + moduleName);
+        }
+        if (verification != null) {
+            // 开始进行模块加载
+            switch (loadMode) {
+                case "read":
+                    ModuleManager.registerModuleRead(verification);
+                    break;
+                case "writer":
+                    ModuleManager.registerModuleWriter(verification);
+                    break;
+                default:
+                    DiskMirrorAutoConfiguration.LOGGER.warning("未定义的模块：" + moduleName);
+                    return;
+            }
+        }
+        DiskMirrorAutoConfiguration.LOGGER.info("已加载 " + loadMode + " 模块：" + moduleName);
+    }
 
     public Config getConfig() {
         final Config config = new Config();
@@ -156,5 +193,12 @@ public class DiskMirrorProperties {
     public void setEnabledFeature(boolean enableFeature) {
         DiskMirrorAutoConfiguration.LOGGER.info("setEnableFeature run = enableFeature:" + enableFeature);
         this.enabledFeature = enableFeature;
+    }
+
+    public void setVerifications(ArrayList<String> verifications) {
+        for (String verification : verifications) {
+            final String[] strings = StrUtils.splitBy(verification, '$', 2);
+            addVerification(strings[0], strings[1]);
+        }
     }
 }

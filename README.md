@@ -22,7 +22,7 @@ maven 中引入，如果您不需要第三方文件系统，可以不引入
     <dependency>
         <groupId>io.github.BeardedManZhao</groupId>
         <artifactId>diskMirror-spring-boot-starter</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
     </dependency>
     <!-- 导入 fastjson2 库 这是一个JSON解析库，被 diskMirror 依赖，您可以像上面一样导入 也是一个可选操作 -->
     <dependency>
@@ -80,6 +80,7 @@ disk-mirror:
   space-max-size: { }
   # 图像文件压缩模块配置
   image-compress-module:
+    # 设置位 true 代表启用~ 反之则不启用 不启用的将不会被加载到 diskMirror 中
     enable: true
     # 设置 png 调色板模式 默认是 RGB_8 代表 8 位压缩
     palette-png: "RGB_8"
@@ -87,6 +88,12 @@ disk-mirror:
     palette-generator: "X255"
     # 设置是否支持透明 默认是 false
     transparent: false
+  # 设置校验模块
+  verifications:
+    # 设置读取操作中的 sk 校验 这样所有的读取操作都需要经过这个模块了
+    - "SkCheckModule$read",
+    # 设置写入操作中的 sk 校验 这样所有的写入操作都需要经过这个模块了
+    - "SkCheckModule$writer"
 ```
 
 ### MAIN 启动主类
@@ -122,47 +129,54 @@ public class SpringBoot3DemoApplication {
 当看到下面这样的日志，则代表启动成功了，diskMirror 也被成功的集成了进来！！
 
 ```
+19:47:13.595 [main] INFO top.lingyuzhao.diskMirror.backEnd.springConf.DiskMirrorMAIN -- 允许跨域列表：[]
+
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::                (v3.2.1)
+ :: Spring Boot ::                (v3.0.5)
 
-2024-02-13T23:18:29.914+08:00  INFO 6016 --- [           main] c.e.s.SpringBoot3DemoApplication         : Starting SpringBoot3DemoApplication using Java 17.0.9 with PID 6016 (G:\My_Project\IDEA\SpringBoot3Demo\target\classes started by zhao in G:\My_Project\IDEA\SpringBoot3Demo)
-2024-02-13T23:18:29.918+08:00  INFO 6016 --- [           main] c.e.s.SpringBoot3DemoApplication         : No active profile set, falling back to 1 default profile: "default"
-2024-02-13T23:18:30.256+08:00  INFO 6016 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2024-02-13T23:18:30.261+08:00  INFO 6016 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2024-02-13T23:18:30.261+08:00  INFO 6016 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
-2024-02-13T23:18:30.287+08:00  INFO 6016 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2024-02-13T23:18:30.288+08:00  INFO 6016 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 352 ms
-2024-02-13T23:18:30.309+08:00  INFO 6016 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : load properties class top.lingyuzhao.diskMirror.starter.conf.properties.DiskMirrorProperties
-2024-02-13T23:18:30.309+08:00  INFO 6016 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : getAdapterType run = adapterType:LocalFSAdapter
-2024-02-13T23:18:30.310+08:00  INFO 6016 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : diskMirror is ok!!!
-             'WWWKXXXXNWWNk,     ,kkd7               KWWb,                     
-             ;WWN3.....,lNWWk.                       KWWb,                     
-             ;WWNl        XWWk.  :XXk,   oKNNWNKo    KWWb,   dXXO:             
-             ;WWNl        3WWX7  7WWO7  0WWo:,:O0d,  KWWb, lNWKb:              
-             ;WWNl        :WWNl  7WWO7  0WWO,.       KWWbbXWKb:.               
-             ;WWNl        kWW03  7WWO7   lXWWWN0o.   KWWNWWW0;                 
-             ;WWNl       lWWNo,  7WWO7     .,7dWWN;  KWWOolWWN7                
-             'WWNo,..,'oXWWKo'   7WWO7 .lb:    XWNl. KWWb, .KWWk.              
-             ;WWWWWWWWWNKOo:.    7WWO7  oNWX0KWWKb:  KWWb,   bWWX'             
-              ,'''''''',,.        ,'',    ,;777;,.    '''.    .''',            
-KWWNWK,        ,WWNWWd.   ;33:                                                 
-KWWbWWO.       XWXkWWd.   ...    ...  .,,   ...  ,,.      .,,,,        ...  .,,
-KWWodWWd      OWNlOWWd.  .WWN7   KWW3OWNWl.:WWOlNWNO:  3KWWXXNWWXo.   ,WWX3XWNK
-KWWo.OWWo    oWWb;xWWd.  .WWXl   0WWXkl',, ;WWNKb:,,, XWWkl,..,oWWN'  ,WWNKd7,,
-KWWo  XWN7  ;WWx3 dWWd.  .WWXl   0WWO3     ;WWWl,    bWW03      OWWk, ,WWWo'   
-KWWo  ,NWK',NW0l  dWWd.  .WWXl   0WWd,     ;WWX3     kWWO:      dWMO: ,WWNl    
-KWWo   ;WWkKWXl.  dWWd.  .WWXl   0WWd.     ;WWK7     7WWX7      XWWd; ,WWN3    
-KWWo    lWWWNo,   dWWd.  .WWXl   0WWd.     ;WWK7      oWWX3,.,7XWWk3  ,WWN3    
-kXXo     dXXd:    oXXb.  .KX0l   xXXb.     'KXO7       .o0XNNNXKkl'   .KXKl    
-LocalFSAdapter:1.1.2
-2024-02-13T23:18:30.419+08:00  INFO 6016 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
-2024-02-13T23:18:30.423+08:00  INFO 6016 --- [           main] c.e.s.SpringBoot3DemoApplication         : Started SpringBoot3DemoApplication in 0.661 seconds (process running for 0.9)
-http://localhost:80/
+2024-12-05T19:47:13.844+08:00  INFO 44908 --- [           main] t.l.d.backEnd.springConf.DiskMirrorMAIN  : Starting DiskMirrorMAIN using Java 17.0.12 with PID 44908 (F:\MyGithub\diskMirror-backEnd-spring-boot\target\classes started by zhao in F:\MyGithub\diskMirror-backEnd-spring-boot)
+2024-12-05T19:47:13.845+08:00  INFO 44908 --- [           main] t.l.d.backEnd.springConf.DiskMirrorMAIN  : No active profile set, falling back to 1 default profile: "default"
+2024-12-05T19:47:14.377+08:00  INFO 44908 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2024-12-05T19:47:14.383+08:00  INFO 44908 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-05T19:47:14.383+08:00  INFO 44908 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.7]
+2024-12-05T19:47:14.437+08:00  INFO 44908 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-12-05T19:47:14.437+08:00  INFO 44908 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 567 ms
+2024-12-05T19:47:14.462+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : setEnableFeature run = enableFeature:true
+2024-12-05T19:47:14.462+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : setAdapterType run = adapterType:LocalFSAdapter
+2024-12-05T19:47:14.462+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : setFsDefaultFs run = fsDefaultFs:hdfs://localhost:8020/
+2024-12-05T19:47:14.463+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : setImageCompressModule run = imageCompressModule:ImageCompressModule
+2024-12-05T19:47:14.522+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : setParams run = params:{}
+2024-12-05T19:47:14.523+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : setProtocolPrefix run = protocolPrefix:
+2024-12-05T19:47:14.523+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : setResKey run = resKey:res
+2024-12-05T19:47:14.523+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : setRootDir run = rootDir:/DiskMirror
+2024-12-05T19:47:14.523+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : setSecureKey run = secureKey:
+2024-12-05T19:47:14.524+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : setSpaceMaxSize run = spaceMaxSize:{}
+2024-12-05T19:47:14.524+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : setUserDiskMirrorSpaceQuota run = userDiskMirrorSpaceQuota:1073741824
+2024-12-05T19:47:14.526+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : 已加载 read 模块：SkCheckModule
+2024-12-05T19:47:14.527+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : 已加载 writer 模块：SkCheckModule
+2024-12-05T19:47:14.527+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : getAdapterType run = adapterType:LocalFSAdapter
+2024-12-05T19:47:14.529+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : loadHandleModule ---> Enable  handleModule.ImageCompressModule
+2024-12-05T19:47:14.529+08:00  INFO 44908 --- [           main] t.l.d.s.c.DiskMirrorAutoConfiguration    : diskMirror is ok!!!
++--------------------------------------------------+
+| https://github.com/BeardedManZhao/DiskMirror.git |
++--------------------------------------------------+
+     \   _     _  
+      \ (c).-.(c) 
+         / ._. \  
+       __\( Y )/__
+      (_.-/'-'\-._) LocalFSAdapter:1.3.5
+    ____  _      __   __  ____                 ____ 
+   / __ \(_)____/ /__/  |/  (_)_____________  / __ \
+  / / / / / ___/ //_/ /|_/ / / ___/ ___/ __ \/ /_/ /
+ / /_/ / (__  ) ,< / /  / / / /  / /  / /_/ / _, _/ 
+/_____/_/____/_/|_/_/  /_/_/_/  /_/   \____/_/ |_|  
+
+2024-12-05T19:47:14.531+08:00  INFO 44908 --- [           main] t.l.d.backEnd.springConf.DiskMirrorMAIN  : diskMirror 明文密钥："" 被解析为数字密钥：0
 
 ```
 
@@ -173,9 +187,16 @@ http://localhost:80/
 
 ## 更新记录
 
+#### 1.0.5
+
+*发布时间：2024-12-05*
+
+- 支持使用 `verifications` 配置，进行 sk 等请求处理器的注册操作！
+- 装载 1.3.5 版本的 diskMirror
+
 #### 1.0.4
 
-*发布事件：2024-11-22*
+*发布时间：2024-11-22*
 
 - 对于限定条件进行了优化，且对于异常的信息和日志打印进行了优化，易于排查
 - 装载了 1.3.2 版本的 diskMirror

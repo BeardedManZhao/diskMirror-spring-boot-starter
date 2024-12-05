@@ -31,4 +31,10 @@ disk-mirror:
     palette-generator: "X255"
     # 设置是否支持透明 默认是 false
     transparent: false
+  # 设置校验模块
+  verifications:
+    # 设置读取操作中的 sk 校验 这样所有的读取操作都需要经过这个模块了
+    - "SkCheckModule$read",
+    # 设置写入操作中的 sk 校验 这样所有的写入操作都需要经过这个模块了
+    - "SkCheckModule$writer"
 
