@@ -21,6 +21,14 @@ disk-mirror:
   secure-key: ""
   # 指定的几个用户的空间对应的容量
   space-max-size: { }
+  # 是否允许覆盖写文件 如果为 true 则代表不允许覆盖写文件，反之则允许覆盖写文件
+  not-over-write: true
+  # 设置要使用的空间配置方式 目前支持 HashMapper 和 RedisMapper 两种，用于将不同空间的配置信息放到第三方平台
+  use-space-config-mode: "HashMapper"
+  # redis 配置
+  redis-host-port-db: "127.0.0.1:6379:0"
+  # redis 密码
+  redis-password: "-"
   # 图像文件压缩模块配置
   image-compress-module:
     # 设置位 true 代表启用~ 反之则不启用 不启用的将不会被加载到 diskMirror 中
@@ -34,7 +42,7 @@ disk-mirror:
   # 设置校验模块
   verifications:
     # 设置读取操作中的 sk 校验 这样所有的读取操作都需要经过这个模块了
-    - "SkCheckModule$read",
+    - "SkCheckModule$read"
     # 设置写入操作中的 sk 校验 这样所有的写入操作都需要经过这个模块了
     - "SkCheckModule$writer"
 

@@ -22,7 +22,7 @@ maven 中引入，如果您不需要第三方文件系统，可以不引入
     <dependency>
         <groupId>io.github.BeardedManZhao</groupId>
         <artifactId>diskMirror-spring-boot-starter</artifactId>
-        <version>1.0.5</version>
+        <version>1.0.6</version>
     </dependency>
     <!-- 导入 fastjson2 库 这是一个JSON解析库，被 diskMirror 依赖，您可以像上面一样导入 也是一个可选操作 -->
     <dependency>
@@ -43,6 +43,7 @@ maven 中引入，如果您不需要第三方文件系统，可以不引入
 |------------|--------------------|--------------------|
 | `<= 1.0.2` | `*`                | `*`                |
 | `>= 1.0.3` | `>= 1.3.0`         | `>= 1.0.20241026`  |
+| `>= 1.0.6` | `>= 1.4.5`         | `>= 1.0.20241115`  |
 
 ## 开发基本的 SpringBoot3 项目
 
@@ -78,6 +79,14 @@ disk-mirror:
   secure-key: ""
   # 指定的几个用户的空间对应的容量
   space-max-size: { }
+  # 是否允许覆盖写文件 如果为 true 则代表不允许覆盖写文件，反之则允许覆盖写文件
+  not-over-write: true
+  # 设置要使用的空间配置方式 目前支持 HashMapper 和 RedisMapper 两种，用于将不同空间的配置信息放到第三方平台
+  use-space-config-mode: "HashMapper"
+  # redis 配置
+  redis-host-port-db: "127.0.0.1:6379:0"
+  # redis 密码
+  redis-password: "-"
   # 图像文件压缩模块配置
   image-compress-module:
     # 设置位 true 代表启用~ 反之则不启用 不启用的将不会被加载到 diskMirror 中
@@ -91,7 +100,7 @@ disk-mirror:
   # 设置校验模块
   verifications:
     # 设置读取操作中的 sk 校验 这样所有的读取操作都需要经过这个模块了
-    - "SkCheckModule$read",
+    - "SkCheckModule$read"
     # 设置写入操作中的 sk 校验 这样所有的写入操作都需要经过这个模块了
     - "SkCheckModule$writer"
 ```
@@ -186,6 +195,13 @@ public class SpringBoot3DemoApplication {
 中的适配器对象，您可以通过适配器对象实现有效的文件操作，具体使用方法请参考 [diskMirror 的主页](https://github.com/BeardedManZhao/DiskMirror.git)
 
 ## 更新记录
+
+#### 1.0.6
+
+*发布时间：2025-02-03*
+
+- 修复了一些配置数据映射不成功的问题！
+- 装载了 1.4.4 版本的 diskMirror
 
 #### 1.0.5
 

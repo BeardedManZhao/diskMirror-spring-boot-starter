@@ -5,7 +5,7 @@
 
     <groupId>io.github.BeardedManZhao</groupId>
     <artifactId>diskMirror-spring-boot-starter</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <packaging>jar</packaging>
     <name>diskMirror-spring-boot-starter</name>
     <description>diskMirror-spring-boot-starter</description>
@@ -15,7 +15,7 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <diskMirror.version>1.3.5</diskMirror.version>
+        <diskMirror.version>1.4.4</diskMirror.version>
         <fastjson.version>2.0.25</fastjson.version>
         <zhaoUtils.version>1.2.20241115</zhaoUtils.version>
     </properties>
